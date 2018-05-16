@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+
+
+    <!-- status : 这个用于设置log4j2自身内部的信息输出,可以不设置,当设置成trace时,会看到log4j2内部各种详细输出 ,默认OFF
+	     monitorInterval : Log4j能够自动检测修改配置文件和重新配置本身, 设置间隔秒数。%d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+        %p : 日志输出格式
+        %c : logger的名称
+        %m : 日志内容，即 logger.info("message")
+        %n : 换行符
+        %C : Java类名
+        %L : 日志输出所在行数
+        %M : 日志输出所在方法名
+        hostName : 本地机器名 hostAddress : 本地ip地址
+    -->
+    <Appenders status="OFF">
+        <Console name="SYSOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="DEBUG_ROLLING_FILE"
+                     fileName="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/log_debug.log"
+                     filePattern="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/%d{yyyy-MM-dd}_log_debug.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="25 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="BUSSINESS_DEBUG_ROLLING_FILE"
+                     fileName="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/bus_log_debug.log"
+                     filePattern="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/%d{yyyy-MM-dd}_bus_log_debug.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="25 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ERROR_ROLLING_FILE"
+                     fileName="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/log_error.log"
+                     filePattern="/Users/huixiaolv/G6/TestWorkSpace/springbootdemo2/log/%d{yyyy-MM-dd}_log_error.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="25 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.example.demo" level="debug" additivity="false">
+            <AppenderRef ref="BUSSINESS_DEBUG_ROLLING_FILE"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="SYSOUT"/>
+            <AppenderRef ref="DEBUG_ROLLING_FILE"/>
+            <AppenderRef ref="ERROR_ROLLING_FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>
