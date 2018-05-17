@@ -1,0 +1,62 @@
+
+#spring:
+#  profiles:
+#    active: test
+#
+#---
+#
+#spring:
+#  profiles: test
+#
+#server:
+#  port: 8087
+#
+#---
+#
+#spring:
+#  profiles: dev
+#
+#server:
+#  port: 8081
+#
+#---
+#
+#spring:
+#  profiles: prod
+#
+#server:
+#  port: 8088
+
+
+userinfo:
+  account: huixiao
+  age: 25
+  active: true
+  createdDate: 2018/05/16 15:24:20
+  map: {k1: v1,k2: v2}
+  list:
+    - one
+    - two
+  position:
+    name: java高级工程师
+    salary: 15000.00
+  dog:
+    test: 123;
+yaml:
+  str: 字符串可以不加引号
+  specialStr: "双引号直接输出\n特殊字符"
+  specialStr2: '单引号可以转义\n特殊字符'
+  flage: false
+  num: 666
+  Dnum: 88.88
+  list:
+    - one
+    - two
+    - two
+  set: [1,2,3,4]
+  map: {name: hx,age: 12}
+  positions:
+    - name: manager
+      salary: 14000.00
+    - name: stuff
+      salary: 8000.00

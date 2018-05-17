@@ -6,10 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -29,12 +27,12 @@ public class DemoApplicationTests {
 		/**
 		 * ctx.scan/refresh方法之后之前springboot启动初始化的bean被重新覆盖了？为什么？
 		 */
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.scan("com.example.demo.configuration");
-		ctx.refresh();
-//		User user = (User)ctx.getBean("user");
-		System.out.println("userName:"+properties.getName()+" pwd:"+properties.getPwd());
-//		assertEquals("this is a message!",ctx.getBean("message"));
+//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+//		ctx.scan("com.example.demo.configuration");
+//		ctx.refresh();
+////		User user = (User)ctx.getBean("user");
+//		System.out.println("userName:"+properties.getName()+" pwd:"+properties.getPwd());
+////		assertEquals("this is a message!",ctx.getBean("message"));
 	}
 
 	@Test
@@ -45,7 +43,7 @@ public class DemoApplicationTests {
 
 	@Before
 	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new DemoApplicationTests()).build();
+//		mvc = MockMvcBuilders.standaloneSetup(new DemoApplicationTests()).build();
 	}
 
 	@Test

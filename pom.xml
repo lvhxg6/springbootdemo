@@ -58,6 +58,13 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
+		<!-- 使用注解@ConfigurationProperties需要的依赖包-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- SpringBoot实现热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
