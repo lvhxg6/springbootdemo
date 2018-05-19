@@ -9,4 +9,5 @@
         <!--${project.build.directory}-->
         <scp file="./rest-web-standalone.war" todir="root:pass@192.168.1.100:/data/rest-web-standalone.war" trust="true" />
     </target>
+
 </project>
