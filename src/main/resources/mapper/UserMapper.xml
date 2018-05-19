@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="com.example.demo.dao.UserMapper">
+
+    <resultMap id="userEntity" type="com.example.demo.Entity.UserEntity">
+        <!--id映射-->
+        <id property="id" column="id"/>
+        <!-- 普通属性映射  -->
+        <result property="userName" column="username"/>
+        <result property="age" column="age"/>
+        <result property="address" column="address"/>
+        <result property="imagesPath" column="imagespath"/>
+    </resultMap>
+
+    <!-- insert user -->
+    <insert id = "addUser" parameterType="com.example.demo.Entity.UserEntity">
+        INSERT INTO USER(id,username,age,address,imagespath) VALUES(#{id},#{userName},#{age},#{address},#{imagesPath});
+    </insert>
+
+    <!-- update user -->
+    <update id="updateUser" parameterType="com.example.demo.Entity.UserEntity">
+        UPDATE USER SET
+              username = #{userName},age=#{age},address=#{address},imagespath=#{imagesPath}
+        WHERE id = #{id}
+    </update>
+
+    <!-- find user -->
+    <select id="queryUserByID" parameterType="int" resultMap="userEntity">
+        SELECT id,username,age,address,imagespath FROM USER WHERE id=#{0}
+    </select>
+
+    <select id="queryUsers" resultMap="userEntity">
+        SELECT id,username,age,address,imagespath FROM USER
+    </select>
+
+    <!-- delete user -->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM USER WHERE id = #{0}
+    </delete>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!-- 暂时没有使用，只是网上的一个想法-->
+<project name ="WEB" default ="deploy" basedir =".">
+    <property environment="env"/>
+    <target name="deploy">
+        <sshexec host="192.168.1.100" username="root" password="pass" trust="true"
+                 command="rm -rf /data/work; rm -rf /data/rest-web-standalone.war;">
+        </sshexec>
+        <!--${project.build.directory}-->
+        <scp file="./rest-web-standalone.war" todir="root:pass@192.168.1.100:/data/rest-web-standalone.war" trust="true" />
+    </target>
+</project>
