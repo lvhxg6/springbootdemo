@@ -55,6 +55,14 @@ public class UserInforController {
         return userInfoService.queryUser(id);
     }
 
+    /**
+     * http://192.168.10.73:8088/user/5?username=祖超&age=23&address=北京市故宫博物院
+     * @param uid
+     * @param name
+     * @param age
+     * @param address
+     * @return
+     */
     @RequestMapping(value = "/{id}",method = RequestMethod.POST)
     public List<UserEntity> addUser(@PathVariable("id")String uid,
                               @RequestParam("username")String name,
@@ -120,6 +128,7 @@ public class UserInforController {
 
     /**
      * 注解@PathVariable 是从url中取值，URL类似：http://localhost:8080/users/path/1/111/11111
+     * 这样也可以  http://192.168.10.73:8088/user/5?username=祖超&age=24&address=北京市石景山特区
      * @param uid
      * @param name
      * @param age
