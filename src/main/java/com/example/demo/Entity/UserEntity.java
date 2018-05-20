@@ -6,7 +6,7 @@ package com.example.demo.Entity;
 public class UserEntity {
     private String id;
     private String userName;
-    private int age;
+    private String age;
     private String address;
     private String imagesPath;
 
@@ -26,11 +26,11 @@ public class UserEntity {
         this.userName = userName;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

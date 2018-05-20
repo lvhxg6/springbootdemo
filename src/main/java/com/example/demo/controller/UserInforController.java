@@ -58,7 +58,7 @@ public class UserInforController {
     @RequestMapping(value = "/{id}",method = RequestMethod.POST)
     public List<UserEntity> addUser(@PathVariable("id")String uid,
                               @RequestParam("username")String name,
-                              @PathParam("age")Integer age,
+                              @PathParam("age")String age,
                               @PathParam("address")String address){
         logger.debug("/users/"+uid+" method:post...... uid:"+uid+" name:"+name+" age:"+age+" address:"+address);
         UserEntity user = new UserEntity();
@@ -106,7 +106,7 @@ public class UserInforController {
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     public List<UserEntity> updateUser(@PathVariable("id")String uid,
                                  @RequestParam(name="username",required = false)String name,
-                                 @RequestParam("age")Integer age,
+                                 @RequestParam("age")String age,
                                  @RequestParam("address")String address){
         logger.debug("/users/"+uid+" method:put.....uid:"+uid+" name:"+name+" age:"+age+" address:"+address);
         UserEntity user = new UserEntity();
@@ -128,7 +128,7 @@ public class UserInforController {
     @RequestMapping(value = "/path/{id}/{name}/{age}/{address}",method = RequestMethod.PUT)
     public List<UserEntity> updateUser1(@PathVariable("id")String uid,
                                   @PathParam("name") String name,
-                                  @PathParam("age")Integer age,
+                                  @PathParam("age")String age,
                                   @PathParam("address")String address){
         logger.debug("/users/"+uid+" method:put.....uid:"+uid+" name:"+name+" age:"+age+" address:"+address);
         UserEntity user = new UserEntity();
