@@ -177,7 +177,7 @@ public class UserInforController {
 
             // 设置文件存储路径
             String filePath = "//demo//data//";
-            String path = filePath + fileName + suffixName;
+            String path = filePath + fileName;
 
             File dest = new File(path);
             // 检测是否存在目录
@@ -205,7 +205,7 @@ public class UserInforController {
         BufferedOutputStream stream = null;
         for (int i = 0; i < files.size(); ++i) {
             file = files.get(i);
-            String filePath = "//demo//data";
+            String filePath = "//demo//data//";
             if (!file.isEmpty()) {
                 try {
                     byte[] bytes = file.getBytes();
