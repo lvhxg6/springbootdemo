@@ -176,7 +176,7 @@ public class UserInforController {
             logger.info("文件的后缀名为：" + suffixName);
 
             // 设置文件存储路径
-            String filePath = "//demo//data";
+            String filePath = "//demo//data//";
             String path = filePath + fileName + suffixName;
 
             File dest = new File(path);
