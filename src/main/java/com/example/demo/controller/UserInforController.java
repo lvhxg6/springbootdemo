@@ -94,7 +94,33 @@ public class UserInforController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public List<UserEntity> addUsers(@RequestBody UserEntity user){
+    public List<UserEntity> addUsers(@RequestBody UserEntity user,HttpServletRequest request){
+
+        String imagePath = "";
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+        MultipartFile file = null;
+        BufferedOutputStream stream = null;
+        for (int i = 0; i < files.size(); ++i) {
+            file = files.get(i);
+            String filePath = "//demo//data//";
+            imagePath = filePath + file.getOriginalFilename();
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+                    stream = new BufferedOutputStream(new FileOutputStream(
+                            new File(filePath + file.getOriginalFilename())));//设置文件路径及名字
+                    stream.write(bytes);// 写入
+                    stream.close();
+                } catch (Exception e) {
+                    stream = null;
+                    logger.error("第 " + i + " 个文件上传失败  ==> " + e.getMessage());
+//                    return ;
+                }
+            } else {
+                logger.error("第 " + i + " 个文件上传失败因为文件为空");
+            }
+        }
+        user.setImagesPath(imagePath);
         userInfoService.addUser(user);
         return userInfoService.users();
     }
