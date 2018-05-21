@@ -90,12 +90,13 @@ public class UserInforController {
      * headers:   content-type:application/json
      * body:      { "uid": "3", "name": "3333", "password": "3333333"  }
      * springmvc 会把request body中的json发序列化到对应的对象中去
-     * @param user
+     *
+     * @RequestBody UserEntity user,
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public List<UserEntity> addUsers(@RequestBody UserEntity user,HttpServletRequest request){
-
+    public List<UserEntity> addUsers(HttpServletRequest request){
+        logger.debug("/user.......创建用户......");
         String imagePath = "";
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
         MultipartFile file = null;
@@ -120,6 +121,11 @@ public class UserInforController {
                 logger.error("第 " + i + " 个文件上传失败因为文件为空");
             }
         }
+        UserEntity user = new UserEntity();
+        user.setId(request.getParameter("id"));
+        user.setUserName(request.getParameter("userName"));
+        user.setAddress(request.getParameter("address"));
+        user.setAge(request.getParameter("age"));
         user.setImagesPath(imagePath);
         userInfoService.addUser(user);
         return userInfoService.users();
