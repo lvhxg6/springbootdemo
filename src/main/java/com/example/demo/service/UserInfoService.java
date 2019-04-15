@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.Entity.UserEntity;
+import com.example.demo.vo.user.QueryUserVo;
 import com.example.demo.vo.user.UserVo;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface UserInfoService {
     public UserEntity queryUser(String id);
 //    public void patchUser(UserVo uvo,UserDto.request udto);
     public void patchUser(UserVo uvo);
+
+    public Object queryUser(QueryUserVo qvo);
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.aop.paramcopy;
 
+import com.example.demo.annotation.BeanCopy;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,14 +55,44 @@ public class ParamCopyAspectV2 {
 //    @Around(value = "PackagePointCut()")
     @Around(value = "PackagePointCut() && AnnotationPointCut()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable{
-        Object proceed = pjp.proceed(before(pjp));
-        after();
+
+        Object[] args = pjp.getArgs();
+        Class<?>[] argTypes = new Class[args.length];
+
+        for (int i = 0; i < args.length; i++) {
+            argTypes[i] = args[i].getClass();
+        }
+
+        Method method = null;
+        try {
+            method = pjp.getTarget().getClass()
+                    .getMethod(pjp.getSignature().getName(), argTypes);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        BeanCopy copy = method.getAnnotation(BeanCopy.class);
+
+        Class aClass = copy.downTargetClazz();
+        Object proceed = null;
+
+        if(Object.class!=copy.downTargetClazz()){
+            proceed = pjp.proceed(before(pjp));
+        }else{
+            pjp.proceed();
+        }
+        if(Object.class!=copy.upTargetClazz()){
+            after(proceed);
+        }
         return proceed;
     }
 
-    public void after(){
+    private void after(Object proceed) {
 
     }
+
 
     /**
      * Version 1

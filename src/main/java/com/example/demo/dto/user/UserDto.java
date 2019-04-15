@@ -2,6 +2,8 @@ package com.example.demo.dto.user;
 
 import com.example.demo.vo.user.Hobby;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -11,6 +13,15 @@ import java.util.List;
  */
 @Data
 public class UserDto {
+
+    @Getter
+    @Setter
+    public static class queryRequest{
+        public String name;
+        public Integer age;
+        public String gender;
+        public String address;
+    }
 
 
     public static class request{

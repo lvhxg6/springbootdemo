@@ -11,6 +11,10 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.ANNOTATION_TYPE,ElementType.METHOD})
-public @interface HXCopy {
-    Class targetClazz() default Object.class;
+public @interface BeanCopy {
+
+   public Class upTargetClazz() default Object.class;
+
+   public Class downTargetClazz() default Object.class;
+
 }
