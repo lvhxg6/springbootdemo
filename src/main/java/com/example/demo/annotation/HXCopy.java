@@ -7,10 +7,10 @@ import java.lang.annotation.Target;
 
 /**
  * @Author: g6
- * @Date: 2019/4/15 15:30
+ * @Date: 2019/4/15 18:04
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.ANNOTATION_TYPE,ElementType.METHOD})
-public @interface XCopy {
-
+public @interface HXCopy {
+    Class targetClazz() default Object.class;
 }

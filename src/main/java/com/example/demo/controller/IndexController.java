@@ -135,7 +135,7 @@ public class IndexController {
 
     @RequestMapping(value = "/patch",method = RequestMethod.POST)
     public String patchUser(@RequestBody UserVo userVo){
-        userInfoService.patchUser(userVo,null);
+        userInfoService.patchUser(userVo);
         return "success";
     }
 
