@@ -3,6 +3,7 @@ package com.example.demo.aop.paramcopy;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,23 @@ public class ParamCopyAspect {
 //    }
 
 //    @Around(" execution(* com.example.demo.service.*.*(..))")
-    @Around("@annotation(com.example.demo.annotation.XCopy)")
+
+    @Pointcut("execution(* com.example.demo.service.*.*(..))")
+    private void PackagePointCut(){}
+
+    @Pointcut("@annotation(com.example.demo.annotation.XCopy)")
+    private void AnnotationPointCut(){}
+
+
+    /**
+     * 基于注解的AOP切面编程
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
+//    @Around("@annotation(com.example.demo.annotation.XCopy)")
+//    @Around(value = "PackagePointCut()")
+    @Around(value = "PackagePointCut() && AnnotationPointCut()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable{
         return pjp.proceed(before(pjp));
     }
