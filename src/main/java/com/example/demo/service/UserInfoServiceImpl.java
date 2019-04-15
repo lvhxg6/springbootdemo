@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.Entity.UserEntity;
+import com.example.demo.annotation.XCopy;
 import com.example.demo.dao.UserMapper;
+import com.example.demo.dto.user.UserDto;
+import com.example.demo.vo.user.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -76,5 +79,11 @@ public class UserInfoServiceImpl implements UserInfoService{
             logger.debug("queryUser Exception:",e);
         }
         return user;
+    }
+
+    @XCopy
+    @Override
+    public void patchUser(UserVo uvo, UserDto.request udto) {
+        logger.debug(udto.toString());
     }
 }

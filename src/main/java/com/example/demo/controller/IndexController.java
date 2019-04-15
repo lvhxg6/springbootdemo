@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Properties;
 import com.example.demo.Entity.User;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.service.UserService;
+import com.example.demo.vo.user.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class IndexController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserInfoService userInfoService;
 
     @RequestMapping("/index")
     public String index(){
@@ -125,6 +130,13 @@ public class IndexController {
         logger.debug("/users/"+id+" method:delete......id:"+id);
         userService.deleteUser(id);
         return userService.users();
+    }
+
+
+    @RequestMapping(value = "/patch",method = RequestMethod.POST)
+    public String patchUser(@RequestBody UserVo userVo){
+        userInfoService.patchUser(userVo,null);
+        return "success";
     }
 
 

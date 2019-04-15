@@ -13,7 +13,7 @@
         %M : 日志输出所在方法名
         hostName : 本地机器名 hostAddress : 本地ip地址
     -->
-    <Appenders status="OFF">
+    <Appenders status="ON">
         <Console name="SYSOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
@@ -56,13 +56,13 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.example.demo" level="debug" additivity="false">
-            <AppenderRef ref="BUSSINESS_DEBUG_ROLLING_FILE"/>
-        </Logger>
+        <!--<Logger name="com.example.demo" level="debug" additivity="false">-->
+            <!--<AppenderRef ref="BUSSINESS_DEBUG_ROLLING_FILE"/>-->
+        <!--</Logger>-->
         <Root level="debug">
             <AppenderRef ref="SYSOUT"/>
-            <AppenderRef ref="DEBUG_ROLLING_FILE"/>
-            <AppenderRef ref="ERROR_ROLLING_FILE"/>
+            <!--<AppenderRef ref="DEBUG_ROLLING_FILE"/>-->
+            <!--<AppenderRef ref="ERROR_ROLLING_FILE"/>-->
         </Root>
     </Loggers>
 </Configuration>
