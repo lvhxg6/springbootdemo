@@ -75,7 +75,6 @@ public class ParamCopyAspectV2 {
 
         BeanCopy copy = method.getAnnotation(BeanCopy.class);
 
-        Class aClass = copy.downTargetClazz();
         Object proceed = null;
 
         if(Object.class!=copy.downTargetClazz()){
