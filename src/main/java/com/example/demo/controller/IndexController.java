@@ -142,7 +142,7 @@ public class IndexController {
 
     @RequestMapping(value = "/xquery",method = RequestMethod.POST)
     public String xquery(@RequestBody QueryUserVo userVo){
-        userInfoService.queryUser(userVo);
+        Object o = userInfoService.queryUser(userVo);
         return "success";
     }
 

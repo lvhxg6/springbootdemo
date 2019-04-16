@@ -6,10 +6,12 @@ import com.example.demo.annotation.XCopy;
 import com.example.demo.aop.paramcopy.GlobalBussessBeanContainer;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.dto.user.UserDto;
+import com.example.demo.vo.user.QueryUserResVo;
 import com.example.demo.vo.user.QueryUserVo;
 import com.example.demo.vo.user.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,8 +56,9 @@ public class UserInfoServiceImpl implements UserInfoService{
         try{
             users = userMapper.queryUsers();
             logger.debug("service--users--size--"+users.size());
-            if(users.size()>0)
+            if(users.size()>0){
                 logger.debug("service--users--"+users.get(0));
+            }
         }catch (Exception e){
             logger.debug("users Exception:",e);
         }
@@ -98,10 +101,12 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 
     @Override
-    @BeanCopy(downTargetClazz = UserDto.queryRequest.class)
-    public UserDto.queryRequest queryUser(QueryUserVo qvo) {
+    @BeanCopy(downTargetClazz = UserDto.queryRequest.class,upTargetClazz = QueryUserResVo.class)
+    public UserDto.queryResponse queryUser(QueryUserVo qvo) {
         UserDto.queryRequest vo = (UserDto.queryRequest)GlobalBussessBeanContainer.getBean("qvo");
-        return vo;
+        UserDto.queryResponse queryResponse = new UserDto.queryResponse();
+        BeanUtils.copyProperties(vo,queryResponse);
+        return queryResponse;
     }
 
 

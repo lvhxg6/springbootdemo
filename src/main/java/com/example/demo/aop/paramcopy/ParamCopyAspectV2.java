@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -72,21 +74,46 @@ public class ParamCopyAspectV2 {
         }
 
         BeanCopy copy = method.getAnnotation(BeanCopy.class);
+        Class<?> returnType = method.getReturnType();
 
         Object proceed = null;
 
-        if(Object.class!=copy.downTargetClazz()){
+        Class downTargetClazz = copy.downTargetClazz();
+        Class upTargetClazz = copy.upTargetClazz();
+
+        if(Object.class!=downTargetClazz){
             before(pjp,copy.downTargetClazz());
         }
         proceed = pjp.proceed(pjp.getArgs());
-        if(Object.class!=copy.upTargetClazz()){
-            after(proceed);
+        if(Object.class!= upTargetClazz){
+            try{
+                after(proceed,upTargetClazz,returnType);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         return proceed;
     }
 
-    private void after(Object proceed) {
-
+    private void after(Object proceed,Class upTargetClazz,Class proceedType) throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+        Object o = upTargetClazz.newInstance();
+        BeanUtils.copyProperties(proceed,o);
+        Field[] declaredFields = proceedType.getDeclaredFields();
+        Field field = null;
+        Method setMethod = null;
+        for(int i=0;i<declaredFields.length;i++){
+            System.out.print(declaredFields[i].getType()+"      "+proceedType+"\r\n");
+            if(declaredFields[i].getType()==upTargetClazz){
+                String name = declaredFields[i].getName();
+                String methodName = "set" + name.substring(0,1).toString().toUpperCase() + name.substring(1, name.length()).toString();
+                setMethod = proceedType.getDeclaredMethod(methodName, upTargetClazz);
+                break;
+            }
+        }
+        if(setMethod==null){
+            return;
+        }
+        setMethod.invoke(proceed,o);
     }
 
     /**

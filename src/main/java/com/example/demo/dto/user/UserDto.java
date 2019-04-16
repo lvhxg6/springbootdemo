@@ -1,6 +1,7 @@
 package com.example.demo.dto.user;
 
 import com.example.demo.vo.user.Hobby;
+import com.example.demo.vo.user.QueryUserResVo;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,16 @@ public class UserDto {
         public Integer age;
         public String gender;
         public String address;
+    }
+
+    @Getter
+    @Setter
+    public static class queryResponse{
+        public String name;
+        public Integer age;
+        public String gender;
+        public String address;
+        public QueryUserResVo resVo;
     }
 
 
