@@ -1,8 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.Entity.UserEntity;
+import com.example.demo.annotation.BeanCopy;
 import com.example.demo.annotation.XCopy;
+import com.example.demo.aop.paramcopy.GlobalBussessBeanContainer;
 import com.example.demo.dao.UserMapper;
+import com.example.demo.dto.user.UserDto;
 import com.example.demo.vo.user.QueryUserVo;
 import com.example.demo.vo.user.UserVo;
 import org.slf4j.Logger;
@@ -93,9 +96,12 @@ public class UserInfoServiceImpl implements UserInfoService{
         logger.debug("");
     }
 
+
     @Override
-    public Object queryUser(QueryUserVo qvo) {
-        return null;
+    @BeanCopy(downTargetClazz = UserDto.queryRequest.class)
+    public UserDto.queryRequest queryUser(QueryUserVo qvo) {
+        UserDto.queryRequest vo = (UserDto.queryRequest)GlobalBussessBeanContainer.getBean("qvo");
+        return vo;
     }
 
 

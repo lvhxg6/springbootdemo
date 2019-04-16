@@ -18,8 +18,8 @@ public class GlobalBussessBeanContainer {
     }
 
     public static Object getBean(String key){
-        if(beanContainer.containsKey(key)){
-            return beanContainer.get(warrper(key));
+        if(beanContainer.containsKey(warrper(key))){
+            return beanContainer.remove(warrper(key));
         }
         return null;
     }

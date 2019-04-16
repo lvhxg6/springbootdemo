@@ -23,18 +23,6 @@ public class ParamCopyAspect {
 
     private static Logger logger = LoggerFactory.getLogger(ParamCopyAspect.class);
 
-//    @Before(" execution(* com.example.demo.service.*.*(..))")
-//    public void before(JoinPoint joinPoint){
-//        logger.info(" Check for user access ");
-//        logger.info(" Allowed execution for {}", joinPoint);
-//        Object[] argValuess = joinPoint.getArgs();
-//        String[] parameterNames = ((CodeSignature) joinPoint.getStaticPart().getSignature()).getParameterNames();
-//        for(int i=0;i<parameterNames.length;i++){
-//            logger.info(parameterNames[i]+","+argValuess[i]);
-//        }
-//    }
-
-//    @Around(" execution(* com.example.demo.service.*.*(..))")
 
     @Pointcut("execution(* com.example.demo.service.*.*(..))")
     private void PackagePointCut(){}
