@@ -87,17 +87,17 @@ public class UserInfoServiceImpl implements UserInfoService{
         return user;
     }
 
-//    @XCopy
-//    @Override
-//    public void patchUser(UserVo uvo, UserDto.request udto) {
-//        logger.debug(udto.toString());
-//    }
-
     @XCopy
     @Override
-    public void patchUser(UserVo uvo) {
-        logger.debug("");
+    public void patchUser(UserVo uvo, UserDto.request udto) {
+        logger.debug(udto.toString());
     }
+
+//    @XCopy
+//    @Override
+//    public void patchUser(UserVo uvo) {
+//        logger.debug("");
+//    }
 
 
     @Override
