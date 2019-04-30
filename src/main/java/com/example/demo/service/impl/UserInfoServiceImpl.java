@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.annotation.BeanCopy;
@@ -6,6 +6,7 @@ import com.example.demo.annotation.XCopy;
 import com.example.demo.aop.paramcopy.GlobalBussessBeanContainer;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.dto.user.UserDto;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.user.QueryUserResVo;
 import com.example.demo.vo.user.QueryUserVo;
 import com.example.demo.vo.user.UserVo;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 //@ComponentScan({"com.example.demo.dao"}) 注释了这个也好使
 @Service
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 

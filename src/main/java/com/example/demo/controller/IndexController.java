@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Properties;
 import com.example.demo.Entity.User;
+import com.example.demo.http.XResponse;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.service.UserService;
+import com.example.demo.utils.JsonUtils;
 import com.example.demo.vo.user.QueryUserVo;
 import com.example.demo.vo.user.UserVo;
 import org.slf4j.Logger;
@@ -142,8 +144,11 @@ public class IndexController {
 
     @RequestMapping(value = "/xquery",method = RequestMethod.POST)
     public String xquery(@RequestBody QueryUserVo userVo){
-        Object o = userInfoService.queryUser(userVo);
-        return "success";
+//        Object o = userInfoService.queryUser(userVo);
+        XResponse xResponse = new XResponse();
+        xResponse.setCode(0);
+        xResponse.setMsg("success");
+        return JsonUtils.getBeanToJson(xResponse);
     }
 
 
