@@ -8,7 +8,7 @@ import com.example.demo.http.XResponse;
  */
 public interface HttpCallService{
 
-    <T> T getCall(String req,Class<T> clazz);
+    XResponse getCall(String req);
 
     XResponse postCall(String req);
 

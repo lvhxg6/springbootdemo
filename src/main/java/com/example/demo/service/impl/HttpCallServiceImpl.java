@@ -28,9 +28,12 @@ public class HttpCallServiceImpl implements HttpCallService{
     @Override
     @Retryable(value = GetCallFailedException.class,maxAttempts = 3,
             backoff = @Backoff(delay = 1000L,multiplier = 2))
-    public <T> T getCall(String req,Class<T> clazz) {
-//        return (T) httpClient.get(req,clazz);
-        return null;
+    public XResponse getCall(String req) {
+        XResponse get = httpClient.get(req, XResponse.class);
+        if(get.getCode()!=0){
+            throw new GetCallFailedException(get.getMsg());
+        }
+        return get;
     }
 
     @Recover
