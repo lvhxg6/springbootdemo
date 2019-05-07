@@ -18,20 +18,20 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
 
-		RetryService service = run.getBean(RetryService.class);
-		service.query();
-
-		HttpCallServiceImpl service1 = run.getBean(HttpCallServiceImpl.class);
-
-		try {
-			QueryUserVo vo = new QueryUserVo();
-			vo.setAddress("address");
-			vo.setAge(1);
-			vo.setGender("f");
-			vo.setName("hx");
-			XResponse xResponse = service1.postCall(JsonUtils.getBeanToJson(vo));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		RetryService service = run.getBean(RetryService.class);
+//		service.query();
+//
+//		HttpCallServiceImpl service1 = run.getBean(HttpCallServiceImpl.class);
+//
+//		try {
+//			QueryUserVo vo = new QueryUserVo();
+//			vo.setAddress("address");
+//			vo.setAge(1);
+//			vo.setGender("f");
+//			vo.setName("hx");
+//			XResponse xResponse = service1.postCall(JsonUtils.getBeanToJson(vo));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }

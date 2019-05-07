@@ -2,8 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Entity.UserInfo;
+import com.example.demo.Entity.XResponse;
 import com.example.demo.Entity.YamlEntity;
 import com.example.demo.service.UserInfoService;
+import com.example.demo.utils.JsonUtils;
+import genius.oemp.admin.service.dto.AssetAcquisitonItemDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -320,6 +324,27 @@ public class UserInforController {
         return "hello world";
     }
 
+    @PostMapping("/syn")
+    public String syn(@RequestBody List<AssetAcquisitonItemDto.ChangeAssetInfo> requests){
+        StringBuilder sb = new StringBuilder();
+        requests.forEach(item -> {
+            sb.append(item.toString()).append("\r\n");
+        });
+        logger.debug(">>>>>>>>>>"+sb.toString());
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("xxxxx");
+        XResponse xResponse = new XResponse();
+        xResponse.setCode(0);
+        xResponse.setMsg("success");
+        xResponse.setData(strings);
+        return JsonUtils.getBeanToJson(xResponse);
+    }
+
+    @GetMapping("/check")
+    public String check(@RequestParam(value = "assetCodeList") String assetCodeList){
+
+        return "";
+    }
 
 
 }
