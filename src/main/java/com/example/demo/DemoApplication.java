@@ -15,23 +15,30 @@ import org.springframework.retry.annotation.EnableRetry;
 @SpringBootApplication
 public class DemoApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
 
-//		RetryService service = run.getBean(RetryService.class);
-//		service.query();
-//
-//		HttpCallServiceImpl service1 = run.getBean(HttpCallServiceImpl.class);
-//
-//		try {
-//			QueryUserVo vo = new QueryUserVo();
-//			vo.setAddress("address");
-//			vo.setAge(1);
-//			vo.setGender("f");
-//			vo.setName("hx");
-//			XResponse xResponse = service1.postCall(JsonUtils.getBeanToJson(vo));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		Thread.sleep(1*10*1000);
+		
+//		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+		RetryService service = run.getBean(RetryService.class);
+		service.query();
+
+		HttpCallServiceImpl service1 = run.getBean(HttpCallServiceImpl.class);
+		System.out.println(service1);
+
+		Thread.sleep(1*10*1000);
+
+		try {
+			QueryUserVo vo = new QueryUserVo();
+			vo.setAddress("address");
+			vo.setAge(1);
+			vo.setGender("f");
+			vo.setName("hx");
+			XResponse xResponse = service1.postCall(JsonUtils.getBeanToJson(vo));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

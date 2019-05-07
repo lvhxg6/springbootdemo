@@ -42,18 +42,19 @@ public class HttpCallServiceImpl implements HttpCallService{
     }
 
     @Override
-    @Retryable(value = PostCallFailedException.class,maxAttempts = 3, backoff = @Backoff(delay = 1000L,multiplier = 1))
+    @Retryable(value = PostCallFailedException.class , maxAttempts = 3, backoff = @Backoff(delay = 1000L,multiplier = 1))
     public XResponse postCall(String req) {
         XResponse post = httpClient.post(req, XResponse.class);
         if(post.getCode()!=0){
             throw new PostCallFailedException(post.getMsg());
         }
+        System.out.println(">>>>>>>>>>success<<<<<<<<<<");
         return post;
     }
 
     @Recover
     public XResponse postRecover(PostCallFailedException e){
-        logger.debug("post recover......");
+        System.out.println("post recover......");
         return null;
     }
 

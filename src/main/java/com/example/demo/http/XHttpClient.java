@@ -40,10 +40,10 @@ public class XHttpClient {
 
         try {
             if(null==url||"".equals(url)){
-                return null;
+                return getInnerErrorMsg("url未配置");
             }
 
-            URL realUrl = new URL(url);
+            URL realUrl = new URL(url+"/sdf");
             HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
 
             conn.setRequestMethod("POST");

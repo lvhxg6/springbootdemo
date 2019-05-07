@@ -12,4 +12,6 @@ public class XResponse {
     private int code;
     private String msg;
 
+
+
 }
